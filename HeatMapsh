@@ -1,0 +1,42 @@
+#!/bin/bash
+#SBATCH --job-name=zl_heatmap
+#SBATCH --partition=batch
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=seg75580@uga.edu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=20gb
+#SBATCH --time=1:00:00
+#SBATCH --output=heatmap.%j.out
+#SBATCH --error=heatmap.%j.err
+
+cd $SLURM_SUBMIT_DIR
+
+ml deepTools/3.5.2-foss-2022aOUTDIR="/scratch/seg75580/Run147/bowtieSbatch-cyp51A"
+
+mkdir "${OUTDIR}/SortedRegions"
+##you want to run in reference point mode
+## your reference point will be the transcription start site (TSS)
+
+##relevant info
+##-p number of processors
+#-R regions - you will be using a gtf, because your regions are genes (more specifically, the start of genes)
+#-S score file - these will be your bigwig files; you can give all your samples at once
+
+
+##https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
+####Plotting scaled enrichment across all het domains
+
+computeMatrix reference-point -S /scratch/seg75580/Run147/bowtieSbatch-cyp51A/OutputATAC/BigWigs/147-N21_ATAC_P3_SPF92_cyp51A_Hph__Re$
+                --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
+                -o 'Run147_N21_P3.matrix' \
+                --sortRegions keep \
+                --missingDataAsZero \
+                -bs 10
+#https://deeptools.readthedocs.io/en/develop/content/tools/plotHeatmap.html
+plotHeatmap -m 'Run147_N21_P3.matrix'\
+        -o 'Run147_N21_P3.pdf' \
+                --sortRegions descend  \
+                        --sortUsing mean \
+                        --zMax 5 \
+                        --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
