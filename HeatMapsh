@@ -27,8 +27,8 @@ mkdir "${OUTDIR}/SortedRegions"
 ##https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 ####Plotting scaled enrichment across all het domains
 
-computeMatrix reference-point -S /scratch/seg75580/Run147/bowtieSbatch-cyp51A/OutputATAC/BigWigs/147-N21_ATAC_P3_SPF92_cyp51A_Hph__Re$
-                --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
+computeMatrix reference-point -S BIGWIG FILE PATH -R GTF FILE PATH -a 100 -b 100 --referencePoint TSS \
+              --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
                 -o 'Run147_N21_P3.matrix' \
                 --sortRegions keep \
                 --missingDataAsZero \
