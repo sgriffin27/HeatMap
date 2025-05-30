@@ -12,7 +12,8 @@
 
 cd $SLURM_SUBMIT_DIR
 
-ml deepTools/3.5.2-foss-2022aOUTDIR="/scratch/seg75580/Run147/bowtieSbatch-cyp51A"
+ml deepTools/3.5.2-foss-2022a
+OUTDIR="/scratch/seg75580/Run147/bowtieSbatch-cyp51A"
 
 mkdir "${OUTDIR}/SortedRegions"
 ##you want to run in reference point mode
