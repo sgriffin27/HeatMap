@@ -28,16 +28,18 @@ mkdir "${OUTDIR}/SortedRegions"
 ##https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 ####Plotting scaled enrichment across all het domains
 
-computeMatrix reference-point -S BIGWIG FILE PATH -R GTF FILE PATH -a 100 -b 100 --referencePoint TSS \
+computeMatrix reference-point -S BIGWIG FILE PATH -R GTF FILE PATH -a 1000 -b 1000 --referencePoint TSS \
               --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
                 -o 'Run147_N21_P3.matrix' \
                 --sortRegions keep \
+                --skipZeros \
                 --missingDataAsZero \
                 -bs 10
 #https://deeptools.readthedocs.io/en/develop/content/tools/plotHeatmap.html
 plotHeatmap -m 'Run147_N21_P3.matrix'\
         -o 'Run147_N21_P3.pdf' \
                 --sortRegions descend  \
-                        --sortUsing mean \
-                        --zMax 5 \
+                        --sortUsing sum \
+                        --heatmapHeight 15 \
+                        --zMax 0.10 \
                         --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
