@@ -28,6 +28,9 @@ mkdir "${OUTDIR}/SortedRegions"
 ##https://deeptools.readthedocs.io/en/develop/content/tools/computeMatrix.html
 ####Plotting scaled enrichment across all het domains
 
+##first plot 1 bigwig by itself to get sorted genes for only that file
+##then put the files in order that you want in one heatmap figure together
+
 computeMatrix reference-point -S BIGWIG FILE PATH -R GTF FILE PATH -a 1000 -b 1000 --referencePoint TSS \
               --outFileSortedRegions 'Run147_N21_P3.SortedRegions.txt' \
                 -o 'Run147_N21_P3.matrix' \
